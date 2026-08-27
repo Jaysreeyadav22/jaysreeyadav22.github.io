@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay — UI Developer → AI Engineer</title>
+<meta name="description" content="Portfolio of Jay, UI developer moving into AI engineering. RAG, Azure AI, and hands-on builds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDEAE0;
+    --paper-card: #F6F3E9;
+    --ink: #20242B;
+    --ink-soft: #4A5058;
+    --rule: #C9C3AF;
+    --teal: #2F5D56;
+    --teal-light: #3F6E64;
+    --stamp: #A83A2E;
+    --stamp-light: #B9584D;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Lora', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(32,36,43,0.035) 40px);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--stamp); outline-offset: 3px; }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(237,234,224,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; }
+  .nav-mark { font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; color: var(--ink); }
+  .nav-links { display: flex; gap: 22px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; }
+  .nav-links a { color: var(--ink-soft); }
+
+  /* ---------- HERO ---------- */
+  header.hero { padding: 90px 0 70px; }
+  .card-label {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+    padding: 4px 10px;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    max-width: 12ch;
+  }
+  h1 .arrow { color: var(--stamp); }
+  .hero-sub {
+    margin-top: 20px;
+    max-width: 46ch;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .hero-meta {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+  .section-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 34px;
+  }
+  .section-num { font-family: var(--mono); font-size: 12px; color: var(--stamp); }
+  h2 {
+    font-family: var(--mono);
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-text { max-width: 62ch; font-size: 17px; }
+  .about-text p + p { margin-top: 14px; }
+
+  /* ---------- PROJECT CARDS ---------- */
+  .card {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    padding: 26px 26px 22px;
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .card::before {
+    content: '';
+    position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px;
+    background: var(--teal-light);
+  }
+  .card-title-row {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;
+  }
+  .card h3 { font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--ink); }
+  .card-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--stamp); border: 1px solid var(--stamp); padding: 2px 8px; white-space: nowrap;
+    transform: rotate(-2deg);
+  }
+  .card p.desc { margin-top: 10px; font-size: 15.5px; color: var(--ink-soft); max-width: 60ch; }
+  .stack-list { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .stack-chip {
+    font-family: var(--mono); font-size: 11px; color: var(--teal);
+    background: rgba(47,93,86,0.08); padding: 3px 9px; border-radius: 2px;
+  }
+  .card-links { margin-top: 16px; display: flex; gap: 16px; font-family: var(--mono); font-size: 12px; }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; }
+  @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
+  .skill-group h4 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px dashed var(--rule);
+  }
+  .skill-group ul { list-style: none; }
+  .skill-group li {
+    font-size: 15px; padding: 4px 0; color: var(--ink);
+  }
+  .skill-group li::before { content: '— '; color: var(--ink-soft); }
+
+  /* ---------- CERT STAMP ---------- */
+  .cert-card {
+    display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
+    background: var(--paper-card); border: 1px solid var(--rule); padding: 24px 26px;
+  }
+  .stamp-circle {
+    flex-shrink: 0;
+    width: 92px; height: 92px; border-radius: 50%;
+    border: 3px solid var(--stamp);
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-8deg);
+    color: var(--stamp);
+    font-family: var(--mono);
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+  .cert-info h3 { font-family: var(--mono); font-size: 16px; margin-bottom: 6px; }
+  .cert-info p { color: var(--ink-soft); font-size: 15px; max-width: 52ch; }
+  .cert-info .card-links { margin-top: 10px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-row { display: flex; gap: 26px; flex-wrap: wrap; font-family: var(--mono); font-size: 14px; }
+  .contact-row a { color: var(--ink); border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
+  .contact-row a:hover { border-color: var(--teal); color: var(--teal); }
+
+  footer {
+    padding: 34px 0 50px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-mark">J.INDEX</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#cert">Cert</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="card-label">Catalog Card No. 001 — Status: Building</span>
+    <h1>UI Developer <span class="arrow">→</span> AI Engineer</h1>
+    <p class="hero-sub">I build interfaces, then I build what talks back. Currently deep in RAG pipelines, Azure AI, and figuring out how agents actually behave in production — not just in a demo.</p>
+    <div class="hero-meta">
+      <span>UK</span>
+      <span>·</span>
+      <span>TCS</span>
+      <span>·</span>
+      <span>Azure AI-103 Certified</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
+    <div class="about-text">
+      <p>I started as a UI developer and I'm moving into AI engineering the way most people actually learn it — by building things that break, then fixing them. Right now that means Python, RAG pipelines, and the Azure AI stack.</p>
+      <p>I don't post polished takes. If I share something, it's because I actually built it, hit a wall, and figured it out — or I'm still figuring it out. That's the whole approach.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02</span><h2>Projects</h2></div>
+
+    <div class="card">
+      <div class="card-title-row">
+        <h3>Book Character RAG Chat</h3>
+        <span class="card-tag">Flagship</span>
+      </div>
+      <p class="desc">A full-stack RAG app that lets you chat with characters from a book — grounded in the actual text, not general knowledge. Built solo for the Agents League Hackathon and AI Skills Fest.</p>
+      <div class="stack-list">
+        <span class="stack-chip">Angular</span>
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">Azure AI Search</span>
+        <span class="stack-chip">CosmosDB</span>
+        <span class="stack-chip">Python</span>
+      </div>
+      <div class="card-links">
+        <a href="#">View repo →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title-row">
+        <h3>AI-103 Prep Notes</h3>
+        <span class="card-tag">Writeup</span>
+      </div>
+      <p class="desc">Notes on how I actually prepared for Azure's AI-103 exam — learning path, hands-on practice, and what the case-study questions were really like.</p>
+      <div class="stack-list">
+        <span class="stack-chip">Azure AI</span>
+        <span class="stack-chip">Documentation</span>
+      </div>
+      <div class="card-links">
+        <a href="https://gist.github.com/Jaysreeyadav22/3b61b558548504aa7f56b1fadbf7f5b7" target="_blank" rel="noopener">Read the gist →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03</span><h2>Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <ul>
+          <li>Angular</li>
+          <li>TypeScript / JavaScript</li>
+          <li>HTML / CSS</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Backend</h4>
+        <ul>
+          <li>Python</li>
+          <li>FastAPI</li>
+          <li>Async / REST APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Azure &amp; AI</h4>
+        <ul>
+          <li>Azure AI Foundry</li>
+          <li>Azure AI Search (RAG, hybrid search)</li>
+          <li>Prompt engineering</li>
+          <li>Document Intelligence</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Data</h4>
+        <ul>
+          <li>CosmosDB</li>
+          <li>Vector search</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cert">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">04</span><h2>Certification</h2></div>
+    <div class="cert-card">
+      <div class="stamp-circle">AI-103<br>Certified</div>
+      <div class="cert-info">
+        <h3>Azure AI Apps and Agents Developer Associate</h3>
+        <p>Microsoft's current certification for building AI apps and agents on Azure — case-study heavy, scenario-based. Passed on first attempt.</p>
+        <div class="card-links">
+          <a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/" target="_blank" rel="noopener">Learn more about AI-103 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">05</span><h2>Contact</h2></div>
+    <div class="contact-row">
+      <a href="mailto:your-email@example.com">Email</a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Jaysreeyadav22" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Card catalog last updated — 2026</div>
+</footer>
+
+</body>
+</html>
